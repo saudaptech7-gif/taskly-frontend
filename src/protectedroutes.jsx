@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 import { setUser, setLoading } from "./store/authSlice";
+import api from "./api/api";
 
 function ProtectedRoute({ children }) {
   const dispatch = useDispatch();
@@ -12,10 +13,7 @@ function ProtectedRoute({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("http://localhost:5000/auth/me", {
-          method: "GET",
-          credentials: "include",
-        });
+        const response = await api.auth.me();
 
         const data = await response.json();
 
@@ -49,3 +47,4 @@ function ProtectedRoute({ children }) {
 }
 
 export default ProtectedRoute;
+

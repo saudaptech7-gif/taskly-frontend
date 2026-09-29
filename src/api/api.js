@@ -10,6 +10,7 @@ const api = {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(data),
       }),
 
@@ -69,8 +70,9 @@ const api = {
       fetch(`${API_URL}/tasks/${id}`, {
         method: "DELETE",
         credentials: "include",
-      }),  
+      }),
   },
 };
 
 export default api;
+
