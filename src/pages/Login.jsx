@@ -14,6 +14,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/home");
@@ -27,6 +29,12 @@ function Login() {
       alert("Please fill all fields");
       return;
     }
+
+    // Agar login request already chal rahi hai
+    // to dobara request nahi jayegi
+    if (loading) return;
+
+    setLoading(true);
 
     try {
       const response = await api.auth.login({
@@ -46,6 +54,9 @@ function Login() {
     } catch (error) {
       console.log("Login Error:", error);
       alert("Something went wrong");
+    } finally {
+      // Request complete hone ke baad button active ho jayega
+      setLoading(false);
     }
   };
 
@@ -68,7 +79,13 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit">Login</button>
+        <button
+          type="submit"
+          disabled={loading}
+          className={loading ? "login-btn loading" : "login-btn"}
+        >
+          {loading ? "Loading..." : "Login"}
+        </button>
 
         <p>
           Don't have an account?{" "}
@@ -80,3 +97,4 @@ function Login() {
 }
 
 export default Login;
+

@@ -10,8 +10,15 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    // Agar request already chal rahi hai to dobara request nahi jayegi
+    if (loading) return;
+
+    setLoading(true);
 
     try {
       const response = await api.auth.signup({
@@ -32,6 +39,9 @@ function Signup() {
     } catch (error) {
       console.log("Signup Error:", error);
       alert("Something went wrong");
+    } finally {
+      // Request complete hone ke baad button wapas active ho jayega
+      setLoading(false);
     }
   };
 
@@ -61,7 +71,13 @@ function Signup() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit">Signup</button>
+        <button
+          type="submit"
+          disabled={loading}
+          className={loading ? "signup-btn loading" : "signup-btn"}
+        >
+          {loading ? "Loading..." : "Signup"}
+        </button>
 
         <p>
           Already have an account?{" "}

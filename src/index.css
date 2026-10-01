@@ -504,3 +504,21 @@ button {
     font-size: 14px;
   }
 }
+
+.signup-btn.loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.signup-btn:disabled {
+  pointer-events: none;
+}
+
+.login-btn.loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-btn:disabled {
+  pointer-events: none;
+}
