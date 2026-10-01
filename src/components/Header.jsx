@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { logout } from "../store/authSlice";
+import api from "../api/api";
 
 function Header() {
   const dispatch = useDispatch();
@@ -8,13 +10,19 @@ function Header() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const response = await api.auth.logout();
 
-      dispatch(logout());
-      navigate("/login");
+      const data = await response.json();
+
+      if (response.ok) {
+        // Redux se user logout
+        dispatch(logout());
+
+        // Login page par redirect
+        navigate("/login");
+      } else {
+        console.log("Logout Error:", data.message);
+      }
     } catch (error) {
       console.log("Logout Error:", error);
     }
@@ -33,3 +41,4 @@ function Header() {
 }
 
 export default Header;
+
