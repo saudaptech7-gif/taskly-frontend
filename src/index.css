@@ -522,3 +522,84 @@ button {
 .login-btn:disabled {
   pointer-events: none;
 }
+
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f7f9fc;
+}
+
+.taskly-loader {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: tasklyFloat 1.5s ease-in-out infinite;
+}
+
+.taskly-logo {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #2563eb;
+  color: white;
+
+  border-radius: 18px;
+
+  font-size: 34px;
+  font-weight: bold;
+
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+
+  animation: tasklyPulse 1.2s ease-in-out infinite;
+}
+
+.loading-screen h2 {
+  margin-top: 18px;
+  margin-bottom: 4px;
+  font-size: 24px;
+}
+
+.loading-screen p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+
+@keyframes tasklyPulse {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+  }
+
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+  }
+
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+  }
+}
+
+@keyframes tasklyFloat {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

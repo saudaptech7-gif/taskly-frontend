@@ -36,7 +36,16 @@ function ProtectedRoute({ children }) {
   }, [dispatch, isLoggedIn, user]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="loading-screen">
+        <div className="taskly-loader">
+          <div className="taskly-logo">✓</div>
+        </div>
+
+        <h2>Taskly</h2>
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   if (!isLoggedIn || !user) {
@@ -47,4 +56,3 @@ function ProtectedRoute({ children }) {
 }
 
 export default ProtectedRoute;
-
